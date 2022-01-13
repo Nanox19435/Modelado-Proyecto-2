@@ -1,6 +1,6 @@
 package modelo.entidades;
 
-import java.awt.Point;
+//import java.awt.Point;
 import java.awt.Graphics2D;
 import java.awt.geom.*;
 
@@ -11,7 +11,7 @@ public abstract class Entidad implements DateObserver {
     public State cerebro;
     private int id;
     protected String nombre;
-    public Point position;
+    public Point2D.Float position;
     protected Rectangle2D collision;
     
     /**

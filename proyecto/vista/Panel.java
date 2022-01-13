@@ -25,6 +25,7 @@ public class Panel extends JPanel {
 
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
         Iterator<Entidad> iter = controlador.getEntidades();
         while (iter.hasNext()) {
             //Pinta a las entidades

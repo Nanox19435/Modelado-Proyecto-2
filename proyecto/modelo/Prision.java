@@ -9,6 +9,7 @@ import javax.swing.Timer;
 import controlador.Controlador;
 
 import java.awt.Point;
+import java.awt.geom.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,7 +44,8 @@ public class Prision implements DateSubject, ActionListener {
      * @param nombre Nombre del preso a añadir.
      */
     public void agregaPreso(String nombre, Point position) {
-        Preso p = new Preso(nombre, position);
+        Point2D.Float fpos = new Point2D.Float((float) position.x, (float) position.y);
+        Preso p = new Preso(nombre, fpos);
         p.setId(entidades.size());
         this.añadirObservador(p);
         presos.put(p.getID(), p);
@@ -92,7 +94,6 @@ public class Prision implements DateSubject, ActionListener {
             Entidad entidad = iter.next();
             entidad.cerebro.process();
         }
-        System.out.println(entidades.size());
         
         //Tras acabar la lógica, pide al controlador dibujar el estado actual de la simulación.
         controlador.requestRedraw();
