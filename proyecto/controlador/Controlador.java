@@ -77,6 +77,16 @@ public class Controlador implements MouseInputListener {
             case AparecerGuardia:
                 modelo.agregaGuardia("", clickPosition);
                 break;
+            case Seleccionar:
+                Iterator<Entidad> iter = modelo.getEntidades();
+                while (iter.hasNext()) {
+                    Entidad entidad = iter.next();
+                    if (entidad.shape().contains(clickPosition)) {
+                        System.out.println(entidad.getID());
+                        break;
+                    }
+                }
+                break;
             case Inactivo:
                 //En este caso no se hace nada.
                 break;

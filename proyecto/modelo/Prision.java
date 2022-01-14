@@ -1,12 +1,11 @@
 package modelo;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
 import javax.swing.Timer;
-import javax.swing.text.Position;
 
+import aux.IDList;
 import controlador.Controlador;
 
 import java.awt.Point;
@@ -25,7 +24,7 @@ import modelo.entidades.Preso;
 public class Prision implements DateSubject, ActionListener {
     private Hashtable<Integer, Preso> presos;
     private Hashtable<Integer, Guardia> guardias;
-    private ArrayList<Entidad> entidades;
+    private IDList<Entidad> entidades;
     private Timer timer;
     private Controlador controlador;
 
@@ -35,7 +34,7 @@ public class Prision implements DateSubject, ActionListener {
         timer.start();
 
         this.controlador = controlador;
-        this.entidades = new ArrayList<>();
+        this.entidades = new IDList<>();
         this.guardias = new Hashtable<>();
         this.presos = new Hashtable<>();
     }
@@ -47,7 +46,7 @@ public class Prision implements DateSubject, ActionListener {
     public void agregaPreso(String nombre, Point position) {
         Point2D.Float fpos = new Point2D.Float((float) position.x, (float) position.y);
         Preso p = new Preso(nombre, fpos);
-        p.setId(entidades.size());
+        p.setID(entidades.size());
         this.añadirObservador(p);
         presos.put(p.getID(), p);
     }
@@ -59,10 +58,23 @@ public class Prision implements DateSubject, ActionListener {
     public void agregaGuardia(String nombre, Point position) {
         Point2D.Float fpos = new Point2D.Float((float) position.x, (float) position.y);
         Guardia g = new Guardia(nombre, fpos);
-        g.setId(entidades.size());
+        g.setID(entidades.size());
         this.añadirObservador(g);
         guardias.put(g.getID(), g);
         
+    }
+
+    /**
+     * Mata/remueve a la entidad dada. Para ser llamado por otras entidades.
+     * @param eutanasiado
+     */
+    protected void eutanasiar(Entidad eutanasiado) {
+        int id = eutanasiado.getID();
+        entidades.remove(id);
+
+        //Removemos la aparición de esta entidad en estas tablas.
+        guardias.remove(id);
+        presos.remove(id);
     }
     
     public Iterator<Entidad> getEntidades() {
@@ -90,10 +102,10 @@ public class Prision implements DateSubject, ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         Iterator<Entidad> iter = getEntidades();
         while (iter.hasNext()) {
             Entidad entidad = iter.next();
+            if (entidad == null) continue;
             entidad.cerebro.process();
         }
         

@@ -5,6 +5,7 @@ import java.awt.geom.*;
 import modelo.state.preso.Paseando;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.Graphics2D;
 
 public class Preso extends Entidad {
@@ -30,6 +31,11 @@ public class Preso extends Entidad {
         g2d.fillRect((int) this.position.x, (int) this.position.y, WIDTH, HEIGTH);
         g2d.setColor(Color.BLACK);
         g2d.drawRect((int) this.position.x, (int) this.position.y, WIDTH, HEIGTH);
+    }
+
+    @Override
+    public Rectangle shape() {
+        return new Rectangle((int) position.x, (int) position.y, WIDTH, HEIGTH);
     }
     
 }

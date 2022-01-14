@@ -7,6 +7,7 @@ package controlador;
 public enum ClickModes {
     AparecerPreso("Spawnear Preso"),
     AparecerGuardia("Spawnear Guardia"),
+    Seleccionar("Seleccionar"),
     Inactivo("Inactivo");
 
     private String text;
