@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.JFrame;
 
+import java.awt.BorderLayout;
+
 import controlador.Controlador;
 
 public class App {
@@ -12,9 +14,10 @@ public class App {
         JFrame window = new JFrame("Simulación");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Panel board = new Panel();
-        window.add(board);
-        Controlador input = board.getControlador();
+        SimulationPanel simulationPanel = new SimulationPanel();
+        window.add(new UIPanel(simulationPanel.getControlador()), BorderLayout.EAST);
+        window.add(simulationPanel);
+        Controlador input = simulationPanel.getControlador();
         window.addMouseListener(input);
 
         window.setResizable(false);

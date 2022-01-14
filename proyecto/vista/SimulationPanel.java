@@ -10,15 +10,18 @@ import javax.swing.JPanel;
 import controlador.Controlador;
 import modelo.entidades.Entidad;
 
-public class Panel extends JPanel {
+public class SimulationPanel extends JPanel {
 
     private Controlador controlador;
 
-    public Panel() {
+    public SimulationPanel() {
         setPreferredSize(new Dimension(500, 500));
         this.controlador = new Controlador(this);
     }
 
+    /**
+     * Regresa el controlador asociado a este panel.
+     */
     public Controlador getControlador() {
         return this.controlador;
     }

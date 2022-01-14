@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import javax.swing.Timer;
+import javax.swing.text.Position;
 
 import controlador.Controlador;
 
@@ -30,7 +31,7 @@ public class Prision implements DateSubject, ActionListener {
 
     public Prision(Controlador controlador) {
         //Aproximadamente 30 frames.
-        timer = new Timer(32, this);
+        timer = new Timer(16, this);
         timer.start();
 
         this.controlador = controlador;
@@ -55,8 +56,9 @@ public class Prision implements DateSubject, ActionListener {
      * Agrega un guardia a la prisión.
      * @param nombre Nombre del guardia a añadir.
      */
-    public void agregaGuardia(String nombre) {
-        Guardia g = new Guardia(nombre);
+    public void agregaGuardia(String nombre, Point position) {
+        Point2D.Float fpos = new Point2D.Float((float) position.x, (float) position.y);
+        Guardia g = new Guardia(nombre, fpos);
         g.setId(entidades.size());
         this.añadirObservador(g);
         guardias.put(g.getID(), g);
