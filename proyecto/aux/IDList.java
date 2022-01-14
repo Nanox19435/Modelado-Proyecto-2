@@ -17,6 +17,16 @@ public class IDList<T extends IDeable> {
     }
 
     /**
+     * Regresa el elemento en el índice dado por a implementación de esta estructura,
+     * El índice siempre es igual a la ID del elemento retornado.
+     * @param index indice a buscar.
+     * @return Elemento con la ID pasada como índice. Si este no existe, se regresa null.
+     */
+    public T get(int index) {
+        return data.get(index);
+    }
+
+    /**
      * @return tamaño del contenedor.
      */
     public int size() {
@@ -36,8 +46,6 @@ public class IDList<T extends IDeable> {
             data.set(id, e);
         }
     }
-
-    // TODO el metodo remover debe de cambiar por null el índice dado.
 
     /**
      * Remueve el elemento con el índice dado y guarda el índice para su uso posterior.

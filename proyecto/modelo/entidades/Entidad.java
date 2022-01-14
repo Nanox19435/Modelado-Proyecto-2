@@ -14,32 +14,33 @@ public abstract class Entidad implements DateObserver, IDeable {
     private int id;
     protected String nombre;
     public Point2D.Float position;
-    
-    /**
-     * Mueve a la direccion dada esta entidad.
-     */
-    public void goTo() {
-        //TODO
-    }
 
-    /**
-     * Permite cambiar la ID de un preso
-     * @param id
-     */
+    @Override
     public void setID(int ID) {
         this.id = ID;
     }
 
-    /**
-     * Regresa la ID de este preso.
-     * @return
-     */
+    @Override
     public int getID() {
         return this.id;
     }
 
+    /**
+     * Regresa la información de esta entidad. Usese ara comunicar al usuario del estado de esta entidad.
+     * @return
+     */
+    public abstract String info();
+
+    /**
+     * Calcula el rectangulo que constituye a esta entidad. Usese para hacer operaciones con el área.
+     * @return
+     */
     public abstract Rectangle shape();
 
+    /**
+     * Dibuja a esta entidad.
+     * @param g2D objeto para dibujar.
+     */
     public abstract void draw(Graphics2D g2D);
     
 }

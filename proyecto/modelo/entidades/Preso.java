@@ -37,5 +37,13 @@ public class Preso extends Entidad {
     public Rectangle shape() {
         return new Rectangle((int) position.x, (int) position.y, WIDTH, HEIGTH);
     }
+
+    @Override
+    public String info() {
+        String str = "Preso:" + this.nombre +"\n";
+        str += "ID:" + getID() + "\n";
+
+        return str;
+    }
     
 }

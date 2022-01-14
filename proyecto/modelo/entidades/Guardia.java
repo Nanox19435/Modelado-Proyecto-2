@@ -32,5 +32,13 @@ public class Guardia extends Entidad {
     @Override
     public Rectangle shape() {
         return new Rectangle((int) position.x, (int) position.y, WIDTH, HEIGTH);
+    }
+
+    @Override
+    public String info() {
+        String str = "Guardia:" + this.nombre +"\n";
+        str += "ID:" + getID() + "\n";
+
+        return str;
     } 
 }

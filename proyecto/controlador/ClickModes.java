@@ -8,6 +8,8 @@ public enum ClickModes {
     AparecerPreso("Spawnear Preso"),
     AparecerGuardia("Spawnear Guardia"),
     Seleccionar("Seleccionar"),
+    Enfurecer("Hacer agresivo"),
+    Matar("Matar/Eutanasiar/Eliminar"),
     Inactivo("Inactivo");
 
     private String text;

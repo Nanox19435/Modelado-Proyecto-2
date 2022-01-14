@@ -1,7 +1,9 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.Timer;
 
@@ -14,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import modelo.Observer.DateSubject;
+import modelo.Observer.agresion.AgresionObserver;
+import modelo.Observer.agresion.AgresionSubject;
 import modelo.entidades.Entidad;
 import modelo.entidades.Guardia;
 import modelo.entidades.Preso;
@@ -21,9 +25,10 @@ import modelo.entidades.Preso;
 /**
  * Clase principal de la simulación. Maneja toda la lógica del programa.
  */
-public class Prision implements DateSubject, ActionListener {
+public class Prision implements DateSubject, AgresionSubject, ActionListener {
     private Hashtable<Integer, Preso> presos;
     private Hashtable<Integer, Guardia> guardias;
+    private ArrayList<AgresionObserver> patrullando; 
     private IDList<Entidad> entidades;
     private Timer timer;
     private Controlador controlador;
@@ -68,7 +73,7 @@ public class Prision implements DateSubject, ActionListener {
      * Mata/remueve a la entidad dada. Para ser llamado por otras entidades.
      * @param eutanasiado
      */
-    protected void eutanasiar(Entidad eutanasiado) {
+    public void eutanasiar(Entidad eutanasiado) {
         int id = eutanasiado.getID();
         entidades.remove(id);
 
@@ -77,8 +82,25 @@ public class Prision implements DateSubject, ActionListener {
         presos.remove(id);
     }
     
+    /**
+     * @return Regresa un iterador de todas las entidades.
+     */
     public Iterator<Entidad> getEntidades() {
         return entidades.iterator();
+    }
+
+    /**
+     * @return Regresa un iterador de sólo los prisioneros.
+     */
+    public Iterator<Preso> getPresos() {
+        return presos.values().iterator();
+    }
+
+    /**
+     * @return Regresa un iterador de sólo los guardias.
+     */
+    public Iterator<Guardia> getGuardias() {
+        return guardias.values().iterator();
     }
 
     @Override
@@ -111,6 +133,39 @@ public class Prision implements DateSubject, ActionListener {
         
         //Tras acabar la lógica, pide al controlador dibujar el estado actual de la simulación.
         controlador.requestRedraw();
+    }
+
+    @Override
+    public void notifyAgression(Entidad agresor) {
+        for (AgresionObserver agresionObserver : patrullando) {
+            agresionObserver.agressionNotified(agresor);
+        }
+        
+    }
+
+    @Override
+    public void addObserver(AgresionObserver observador) {
+        patrullando.add(observador);
+    }
+
+    @Override
+    public void removeObserver(AgresionObserver observador) {
+        patrullando.remove(observador);
+    }
+
+    /**
+     * Regresa una entidad al azar. distinta del objeto pasado.
+     * @return
+     */
+    public Entidad entidadAzar(Object distinto) {
+        if(entidades.size()==1) return null;
+        Random rand = new Random();
+        Entidad retornable = null;
+        while (retornable == null && distinto != retornable) {
+            int i = rand.nextInt(entidades.size());
+            retornable = entidades.get(i);
+        }
+        return retornable;
     }
 
     

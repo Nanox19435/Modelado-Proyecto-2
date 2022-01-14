@@ -32,7 +32,9 @@ public class SimulationPanel extends JPanel {
         Iterator<Entidad> iter = controlador.getEntidades();
         while (iter.hasNext()) {
             //Pinta a las entidades
-            iter.next().draw((Graphics2D) g);
+            Entidad e = iter.next();
+            if (e == null) continue;
+            e.draw((Graphics2D) g);
         }
     }
 }

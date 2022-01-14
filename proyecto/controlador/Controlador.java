@@ -5,10 +5,13 @@ import java.util.Iterator;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.MouseInputListener;
 
 import modelo.Prision;
 import modelo.entidades.Entidad;
+import modelo.entidades.Preso;
+import modelo.state.preso.Agresivo;
 import vista.SimulationPanel;
 /**
  * Maneja la entrada del usuario y la interacción entre la vista y el modelo (Simulación).
@@ -77,14 +80,24 @@ public class Controlador implements MouseInputListener {
             case AparecerGuardia:
                 modelo.agregaGuardia("", clickPosition);
                 break;
-            case Seleccionar:
-                Iterator<Entidad> iter = modelo.getEntidades();
-                while (iter.hasNext()) {
-                    Entidad entidad = iter.next();
-                    if (entidad.shape().contains(clickPosition)) {
-                        System.out.println(entidad.getID());
-                        break;
-                    }
+            case Seleccionar: //Muestra al usuario la información del 
+                {
+                    Entidad entidad = seleccionar(clickPosition);
+                    JOptionPane.showMessageDialog(null, entidad.info());
+                }
+                break;
+            case Enfurecer: //Vuelve agresivo al prisionero (Sólo prisioneros).
+                Preso p = seleccionarPreso(clickPosition);
+                if (p == null) break;
+                Entidad random = modelo.entidadAzar(p);
+                if (random==null) break;
+                p.cerebro = new Agresivo(p, random);
+                break;
+            case Matar:
+                {
+                    Entidad entidad = seleccionar(clickPosition);
+                    if (entidad==null) break;
+                    modelo.eutanasiar(entidad);
                 }
                 break;
             case Inactivo:
@@ -93,6 +106,38 @@ public class Controlador implements MouseInputListener {
             
         }
         
+    }
+
+    /**
+     * Regresa la primera entidad que encuentre que contenga el punto p en su forma de colisión.
+     * @param p punto a examinar.
+     * @return una entidad que contenga al punto, si existe. null si no.
+     */
+    private Entidad seleccionar(Point p) {
+        Iterator<Entidad> iter = modelo.getEntidades();
+        while (iter.hasNext()) {
+            Entidad entidad = iter.next();
+            if (entidad == null) continue;
+            if (entidad.shape().contains(p)) 
+                return entidad;
+        }
+        return null;
+    }
+
+    /**
+     * Regresa el primer guardia que contenga el punto p en su forma de colisión.
+     * @param p punto a examinar
+     * @return un guardia que contenga al punto, si existe. null si no.
+     */
+    private Preso seleccionarPreso(Point p) {
+        Iterator<Preso> iter = modelo.getPresos();
+        while (iter.hasNext()) {
+            Preso preso = iter.next();
+            if (preso == null) continue;
+            if (preso.shape().contains(p)) 
+                return preso;
+        }
+        return null;
     }
 
     @Override
