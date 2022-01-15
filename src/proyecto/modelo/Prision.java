@@ -124,11 +124,11 @@ public class Prision implements ActionListener {
      * Regresa una entidad al azar. distinta del objeto pasado.
      * @return
      */
-    public Entidad entidadAzar(Object distinto) {
+    public Entidad entidadAzar(Object excluir) {
         if(entidades.size()==1) return null;
         Random rand = new Random();
         Entidad retornable = null;
-        while (retornable == null && distinto != retornable) {
+        while (retornable == null && excluir != retornable) {
             int i = rand.nextInt(entidades.size());
             retornable = entidades.get(i);
         }

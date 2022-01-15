@@ -5,15 +5,12 @@ import java.util.Iterator;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JOptionPane;
 import javax.swing.event.MouseInputListener;
 
 import proyecto.modelo.Prision;
 import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Preso;
-import proyecto.modelo.state.preso.Agresivo;
 import proyecto.vista.SimulationPanel;
-import proyecto.modelo.entidades.Nombres;
 /**
  * Maneja la entrada del usuario y la interacción entre la vista y el modelo (Simulación).
  */
@@ -72,43 +69,10 @@ public class Controlador implements MouseInputListener {
         //Corregimos un ligero desfase que ocurre por el uso de paneles.
         clickPosition.y -= 30;
         //No hace nada si se se hace clic fuera del panel de la simulación.
-        if (500 <= clickPosition.x || 500 <= clickPosition.y) return;
+        if (500 <= clickPosition.x || 500<= clickPosition.y) return;
 
-        switch (this.modo) {
-            case AparecerPreso:
-                modelo.agregaPreso(Nombres.getNombre(), clickPosition);
-                break;
-            case AparecerGuardia:
-                modelo.agregaGuardia(Nombres.getNombre(), clickPosition);
-                break;
-            case Seleccionar: //Muestra al usuario la información del 
-                {
-                    Entidad entidad = seleccionar(clickPosition);
-                    if (entidad == null) break;
-                    JOptionPane.showMessageDialog(null, entidad.info());
-                }
-                break;
-            case Enfurecer: //Vuelve agresivo al prisionero (Sólo prisioneros).
-                Preso p = seleccionarPreso(clickPosition);
-                if (p == null) break;
-                Entidad random = modelo.entidadAzar(p);
-                if (random==null) break;
-                p.cerebro = new Agresivo(p, random);
-                //Notifica a los guardias de que hay un prisionero agresivo.
-                modelo.notifyAgression(p);
-                break;
-            case Matar:
-                {
-                    Entidad entidad = seleccionar(clickPosition);
-                    if (entidad==null) break;
-                    modelo.eutanasiar(entidad);
-                }
-                break;
-            case Inactivo:
-                //En este caso no se hace nada.
-                break;
-            
-        }
+        //Invoca a strategy.
+        this.modo.getStrategy().onClick(e, modelo, this);
         
     }
 
@@ -117,7 +81,7 @@ public class Controlador implements MouseInputListener {
      * @param p punto a examinar.
      * @return una entidad que contenga al punto, si existe. null si no.
      */
-    private Entidad seleccionar(Point p) {
+    public Entidad seleccionar(Point p) {
         Iterator<Entidad> iter = modelo.getEntidades();
         while (iter.hasNext()) {
             Entidad entidad = iter.next();
@@ -133,7 +97,7 @@ public class Controlador implements MouseInputListener {
      * @param p punto a examinar
      * @return un guardia que contenga al punto, si existe. null si no.
      */
-    private Preso seleccionarPreso(Point p) {
+    public Preso seleccionarPreso(Point p) {
         Iterator<Preso> iter = modelo.getPresos();
         while (iter.hasNext()) {
             Preso preso = iter.next();
@@ -164,6 +128,10 @@ public class Controlador implements MouseInputListener {
      */
     public void toggleTimeFlow() {
         modelo.toggleTimeFlow();
+    }
+
+    public void notifyAgression(Preso p) {
+        modelo.notifyAgression(p);
     }
     
 }
