@@ -1,5 +1,6 @@
 package modelo.Observer.neutralization;
 
+
 /**
  * Avisa de la neutralización de una amenza.
  */

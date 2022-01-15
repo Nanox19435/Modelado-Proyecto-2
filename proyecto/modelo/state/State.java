@@ -1,5 +1,7 @@
 package modelo.state;
 
+import modelo.entidades.Entidad;
+
 public interface State {
     /**
      * Código a ejecutarse en cada frame de la simulación.
@@ -12,4 +14,10 @@ public interface State {
      */
     public void eutanasiar();
 
+
+    /**
+     * Regresa el dueño de este estado.
+     * @return
+     */
+    public Entidad dueño();
 }

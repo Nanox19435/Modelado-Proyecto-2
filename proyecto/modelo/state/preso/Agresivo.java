@@ -1,6 +1,7 @@
 package modelo.state.preso;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import modelo.Observer.neutralization.NeutralizationObserver;
 import modelo.Observer.neutralization.NeutralizationSubject;
@@ -66,6 +67,16 @@ public class Agresivo implements State, NeutralizationSubject {
         // TODO Auto-generated method stub
         notifyNeutralization();
         cuerpo.cerebro = new Dead();
+    }
+
+    @Override
+    public Iterator<NeutralizationObserver> getObservers() {
+        return persecutores.iterator();
+    }
+
+    @Override
+    public Entidad dueño() {
+        return cuerpo;
     }
     
 }

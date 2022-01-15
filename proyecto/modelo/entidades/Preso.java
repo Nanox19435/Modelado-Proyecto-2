@@ -21,11 +21,6 @@ public class Preso extends Entidad {
     }
 
     @Override
-    public void upDate(int fecha) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
     public void draw(Graphics2D g2d) {
         g2d.setColor(Color.ORANGE);
         g2d.fillRect((int) this.position.x, (int) this.position.y, WIDTH, HEIGTH);

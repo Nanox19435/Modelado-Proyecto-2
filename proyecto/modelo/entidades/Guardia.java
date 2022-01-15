@@ -3,22 +3,29 @@ package modelo.entidades;
 import java.awt.*;
 import java.awt.geom.*;
 
+import modelo.GuardControl;
 import modelo.state.guard.Patrullando;
 
 public class Guardia extends Entidad {
     public static final int WIDTH = 5;
     public static final int HEIGTH = 8;
-    public Guardia(String nombre, Point2D.Float position) {
+
+    private GuardControl control;
+
+    public Guardia(String nombre, Point2D.Float position, GuardControl control) {
         this.nombre = nombre;
         this.position = position;
+        this.control = control;
 
         this.cerebro = new Patrullando(this);
     }
 
-    @Override
-    public void upDate(int fecha) {
-        // TODO Auto-generated method stub
-        
+    /**
+     * Regresa el control de este guardia.
+     * @return
+     */
+    public GuardControl getControl() {
+        return control;
     }
 
     @Override

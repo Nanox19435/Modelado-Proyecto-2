@@ -83,6 +83,7 @@ public class Controlador implements MouseInputListener {
             case Seleccionar: //Muestra al usuario la información del 
                 {
                     Entidad entidad = seleccionar(clickPosition);
+                    if (entidad == null) break;
                     JOptionPane.showMessageDialog(null, entidad.info());
                 }
                 break;
@@ -92,6 +93,8 @@ public class Controlador implements MouseInputListener {
                 Entidad random = modelo.entidadAzar(p);
                 if (random==null) break;
                 p.cerebro = new Agresivo(p, random);
+                //Notifica a los guardias de que hay un prisionero agresivo.
+                modelo.notifyAgression(p);
                 break;
             case Matar:
                 {

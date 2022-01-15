@@ -1,5 +1,6 @@
 package modelo.state.preso;
 
+import modelo.entidades.Entidad;
 import modelo.entidades.Preso;
 import modelo.state.Dead;
 import modelo.state.State;
@@ -49,6 +50,11 @@ public class Paseando implements State {
     @Override
     public void eutanasiar() {
         cuerpo.cerebro = new Dead();
+    }
+
+    @Override
+    public Entidad dueño() {
+        return cuerpo;
     }
     
 }

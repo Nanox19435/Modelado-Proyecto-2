@@ -51,7 +51,7 @@ public class Patrullando implements State, AgresionObserver {
     @Override
     public boolean agressionNotified(Entidad agresor) {
         // Decide al azar si va a perseguir o no a el agresor dado.
-        boolean random = (new Random()).nextInt(1) == 1;
+        boolean random = (new Random()).nextInt(2) == 1;
 
         if (random) 
             cuerpo.cerebro = new Persiguiendo(cuerpo, agresor);
@@ -62,5 +62,10 @@ public class Patrullando implements State, AgresionObserver {
     @Override
     public void eutanasiar() {
         cuerpo.cerebro = new Dead();
+    }
+
+    @Override
+    public Entidad dueño() {
+        return cuerpo;
     }
 }

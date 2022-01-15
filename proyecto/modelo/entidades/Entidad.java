@@ -6,10 +6,9 @@ import java.awt.Rectangle;
 import java.awt.geom.*;
 
 import aux.IDeable;
-import modelo.Observer.DateObserver;
 import modelo.state.State;
 
-public abstract class Entidad implements DateObserver, IDeable {
+public abstract class Entidad implements IDeable {
     public State cerebro;
     private int id;
     protected String nombre;

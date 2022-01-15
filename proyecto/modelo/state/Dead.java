@@ -19,4 +19,9 @@ public class Dead implements State {
     public void eutanasiar() {
         //No se hace nada
     }
+
+    @Override
+    public Entidad dueño() {
+        return cuerpo;
+    }
 }

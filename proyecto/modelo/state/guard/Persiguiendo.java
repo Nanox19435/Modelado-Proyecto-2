@@ -5,6 +5,7 @@ import modelo.entidades.Entidad;
 import modelo.entidades.Guardia;
 import modelo.state.Dead;
 import modelo.state.State;
+import modelo.state.preso.Agresivo;
 
 public class Persiguiendo implements State, NeutralizationObserver {
 
@@ -14,13 +15,16 @@ public class Persiguiendo implements State, NeutralizationObserver {
     public Persiguiendo(Guardia cuerpo, Entidad objetivo) {
         this.objetivo = objetivo;
         this.cuerpo = cuerpo;
+
+        //Se registra como observador del objetivo.
+        ((Agresivo) objetivo.cerebro).addObserver(this);
     }
 
     @Override
     public boolean process() {
         double distance = objetivo.position.distance(cuerpo.position);
 
-        if (distance <= 5.0) {
+        if (distance <= 9.0) {
             //El objetivo está en rango del cuerpo. Se procede a eutanasiar.
             objetivo.cerebro.eutanasiar();
         }
@@ -38,13 +42,19 @@ public class Persiguiendo implements State, NeutralizationObserver {
     }
 
     @Override
+    public void eutanasiar() {
+        cuerpo.cerebro = new Dead();
+    }
+
+    @Override
     public void neutralizado() {
+        cuerpo.getControl().registerPatrulla(cuerpo);
         cuerpo.cerebro = new Patrullando(cuerpo);
     }
 
     @Override
-    public void eutanasiar() {
-        cuerpo.cerebro = new Dead();
+    public Entidad dueño() {
+        return cuerpo;
     }
     
     

@@ -12,15 +12,5 @@ public interface AgresionSubject {
      */
     public void notifyAgression(Entidad agresor);
 
-    /**
-     * Agrega un observador. Los observadores son los estados de los guardias que están patrullando, es decir,
-     * los que están disponibles para perseguir a un agresor.
-     */
-    public void addObserver(AgresionObserver observador);
-
-    /**
-     * Remueve el observador dado.
-     * @param observador
-     */
-    public void removeObserver(AgresionObserver observador);
+    // Otros métodos se encargaran de manejar las añadidos de observadores en la implementación de esta interfaz.
 }
