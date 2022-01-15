@@ -158,5 +158,12 @@ public class Controlador implements MouseInputListener {
     public void mouseMoved(MouseEvent e) {
         // No se implementa porque no se usa.
     }
+
+    /**
+     * Permite a la vista parar o reanudar el tiempo
+     */
+    public void toggleTimeFlow() {
+        modelo.toggleTimeFlow();
+    }
     
 }

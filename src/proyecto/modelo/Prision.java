@@ -134,4 +134,15 @@ public class Prision implements ActionListener {
         }
         return retornable;
     }
+
+    /**
+     * Pausa o reanunda la simulación.
+     */
+    public void toggleTimeFlow() {
+        if(timer.isRunning()) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
 }
