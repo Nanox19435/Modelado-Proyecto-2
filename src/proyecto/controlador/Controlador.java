@@ -13,6 +13,7 @@ import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Preso;
 import proyecto.modelo.state.preso.Agresivo;
 import proyecto.vista.SimulationPanel;
+import proyecto.modelo.entidades.Nombres;
 /**
  * Maneja la entrada del usuario y la interacción entre la vista y el modelo (Simulación).
  */
@@ -75,10 +76,10 @@ public class Controlador implements MouseInputListener {
 
         switch (this.modo) {
             case AparecerPreso:
-                modelo.agregaPreso("", clickPosition);
+                modelo.agregaPreso(Nombres.getNombre(), clickPosition);
                 break;
             case AparecerGuardia:
-                modelo.agregaGuardia("", clickPosition);
+                modelo.agregaGuardia(Nombres.getNombre(), clickPosition);
                 break;
             case Seleccionar: //Muestra al usuario la información del 
                 {
