@@ -5,6 +5,7 @@ import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Guardia;
 import proyecto.modelo.state.Dead;
 import proyecto.modelo.state.State;
+import proyecto.modelo.state.preso.Agresivo;
 
 public class Persiguiendo implements State, NeutralizationObserver {
 

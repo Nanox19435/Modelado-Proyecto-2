@@ -14,9 +14,6 @@ import java.awt.geom.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import proyecto.modelo.Observer.DateSubject;
-import proyecto.modelo.Observer.agresion.AgresionObserver;
-import proyecto.modelo.Observer.agresion.AgresionSubject;
 import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Guardia;
 import proyecto.modelo.entidades.Preso;

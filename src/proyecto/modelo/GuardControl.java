@@ -1,16 +1,16 @@
-package modelo;
+package proyecto.modelo;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import modelo.Observer.agresion.AgresionSubject;
-import modelo.entidades.Entidad;
-import modelo.entidades.Guardia;
-import modelo.entidades.Preso;
-import modelo.state.guard.Patrullando;
-import modelo.state.guard.Persiguiendo;
+import proyecto.modelo.Observer.agresion.AgresionSubject;
+import proyecto.modelo.entidades.Entidad;
+import proyecto.modelo.entidades.Guardia;
+import proyecto.modelo.entidades.Preso;
+import proyecto.modelo.state.guard.Patrullando;
+import proyecto.modelo.state.guard.Persiguiendo;
 
 /**
  * Clase que guarda la información relacionada con los guardias.

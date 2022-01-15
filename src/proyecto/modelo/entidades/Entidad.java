@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.geom.*;
 
 import proyecto.aux.IDeable;
-import proyecto.modelo.Observer.DateObserver;
 import proyecto.modelo.state.State;
 
 public abstract class Entidad implements IDeable {

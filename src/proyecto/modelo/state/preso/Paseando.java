@@ -1,5 +1,6 @@
 package proyecto.modelo.state.preso;
 
+import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Preso;
 import proyecto.modelo.state.Dead;
 import proyecto.modelo.state.State;

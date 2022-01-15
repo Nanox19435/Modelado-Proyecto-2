@@ -1,6 +1,6 @@
 package proyecto.modelo.state;
 
-import modelo.entidades.Entidad;
+import proyecto.modelo.entidades.Entidad;
 
 public interface State {
     /**
