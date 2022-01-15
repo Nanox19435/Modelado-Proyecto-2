@@ -7,6 +7,9 @@ import proyecto.controlador.Controlador;
 import proyecto.modelo.Prision;
 import proyecto.modelo.entidades.Nombres;
 
+/**
+ * Estrategia de spawnear un guardia.
+ */
 public class SpawnGuardia implements ClickStrategy {
 
     @Override

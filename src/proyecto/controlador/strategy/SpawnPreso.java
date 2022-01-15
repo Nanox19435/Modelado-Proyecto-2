@@ -7,6 +7,9 @@ import proyecto.controlador.Controlador;
 import proyecto.modelo.Prision;
 import proyecto.modelo.entidades.Nombres;
 
+/**
+ * Estragia de spawnear al preso
+ */
 public class SpawnPreso implements ClickStrategy {
 
     @Override

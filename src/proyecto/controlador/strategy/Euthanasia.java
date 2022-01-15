@@ -7,6 +7,9 @@ import proyecto.controlador.Controlador;
 import proyecto.modelo.Prision;
 import proyecto.modelo.entidades.Entidad;
 
+/**
+ * Estrategia de eutanasiar.
+ */
 public class Euthanasia implements ClickStrategy {
 
     @Override

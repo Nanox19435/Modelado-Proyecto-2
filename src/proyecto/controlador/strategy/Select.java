@@ -9,6 +9,9 @@ import proyecto.controlador.Controlador;
 import proyecto.modelo.Prision;
 import proyecto.modelo.entidades.Entidad;
 
+/**
+ * Estrategia de seleccionar una entidad
+ */
 public class Select implements ClickStrategy {
     
     @Override

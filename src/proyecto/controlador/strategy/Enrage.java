@@ -9,6 +9,9 @@ import proyecto.modelo.entidades.Entidad;
 import proyecto.modelo.entidades.Preso;
 import proyecto.modelo.state.preso.Agresivo;
 
+/**
+ * Estrategia que define el comportamiento para hacer enojar a un preso
+ */
 public class Enrage implements ClickStrategy {
 
     @Override
